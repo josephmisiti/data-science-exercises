@@ -54,7 +54,7 @@ d3.csv('drones.csv', function(data){
 	});
 
 	x.domain( d3.extent(data.map(function(d) { return d.date; })) )
-	y.domain( d3.extent(data.map(function(d) { return d.frequency; })) )
+	y.domain( [d3.max(data.map(function(d) { return d.frequency; })), 0] )
 
 	focus.append("g")
 		.attr("class", "x axis")
@@ -69,35 +69,11 @@ d3.csv('drones.csv', function(data){
 		 .data(data)
 		 .enter()
 		 .append("rect")
-		 .attr('width', function(d,i){ return "10"; })
-		 .attr('height', function(d,i){ return y(d.frequency); })
-		 .style('fill','red')
-		 .attr('x', function(d,i){ return i*10; })
-		 .attr('y', function(d){return height-y(d.frequency);})
-	// 	
-		
-	// focus.append("g")
-	// 	 .data(data)
-	// 	 .enter()
-	// 	 .append("text")
-	// 	 .attr('x', function(d,i) { return i*10; })
-	// 	 .attr('y', function(d,i) { return 1; })
-	// 	 .text(function(d){ return d.frequency; })
-		
-		
-	  // bar.append("text")
-	  //     .attr("class", "value")
-	  //     .attr("x", function(d) { return x(d.value); })
-	  //     .attr("y", y.rangeBand() / 2)
-	  //     .attr("dx", -3)
-	  //     .attr("dy", ".35em")
-	  //     .attr("text-anchor", "end")
-	  //     .text(function(d) { return format(d.value); });
-
-	
-
-
- 
+		 .attr('width', function(d,i){ return 5; })
+		 .attr('height', function(d,i){ return height-y(d.frequency); })
+		 .style('fill','steelblue')
+		 .attr('x', function(d,i){ return x(d.date); })
+		 .attr('y', function(d){return y(d.frequency);}) 
 });
 
 
